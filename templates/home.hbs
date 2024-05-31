@@ -1,0 +1,99 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Danh sách người tham gia bảo hiểm<meta name="description" content="">
+    </title>
+    <link rel="stylesheet" href="home.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        Danh sách người tham gia bảo hiểm<meta name="description" content="" />
+      </h1>
+      <button id="add-new-btn" class="btn" onclick="openModal('add')">
+        Thêm
+      </button>
+      <div id="search-container">
+        <input type="text" id="search-input" placeholder="Tìm kiếm..." />
+        <button id="search-btn" class="btn" onclick="search()">Tìm kiếm</button>
+      </div>
+      <div class="table-container">
+        <table id="customer-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Họ tên</th>
+              <th>Tuổi</th>
+              <th>Giới tính</th>
+              <th>Số điện thoại</th>
+              <th>Địa chỉ</th>
+              <th>Gói bảo hiểm</th>
+              <th>Số năm đăng ký</th>
+              <th>Tổng số tiền bảo hiểm</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Dữ liệu sẽ được tạo bằng JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h2 id="modal-title"></h2>
+        <form id="customer-form" onsubmit="saveCustomer(event)">
+          <input type="hidden" id="customer-id" />
+          <input type="text" id="customer-name" placeholder="Họ tên" required />
+          <input
+            type="number"
+            id="customer-age"
+            placeholder="Tuổi"
+            min="1"
+            max="100"
+            required
+          />
+          <select id="customer-gender" required>
+            <option value="">Chọn giới tính</option>
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+          </select>
+          <input
+            type="text"
+            id="customer-phone"
+            placeholder="Số điện thoại"
+            pattern="\d{10}"
+            required
+          />
+          <input
+            type="text"
+            id="customer-address"
+            placeholder="Địa chỉ"
+            required
+          />
+          <select id="customer-insurance" required>
+            <option value="">Chọn gói bảo hiểm</option>
+            <option value="Thường">Thường</option>
+            <option value="VIP">VIP</option>
+          </select>
+
+          <select id="customer-years" required>
+            <option value="">Số năm đăng ký</option>
+            <option value="1">1 Năm</option>
+            <option value="2">2 Năm</option>
+            <option value="3">3 Năm</option>
+            <option value="4">4 Năm</option>
+            <option value="5">5 Năm</option>
+          </select>
+          <button type="submit" id="save-btn" class="btn">Lưu</button>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="/home.js"></script>
+  </body>
+</html>
