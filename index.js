@@ -1,11 +1,11 @@
 const express = require("express");
 const path = require("path");
 const hbs = require("hbs");
-const { LogInModel, UserModel } = require("./mongodb");
+const { LogInModel, UserModel } = require("./src/mongodb");
 
 const app = express();
 const port = process.env.PORT || 3000;
-const templatePath = path.join(__dirname, "../templates");
+const templatePath = path.join(__dirname, "/templates");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
