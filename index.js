@@ -1,10 +1,14 @@
 const express = require("express");
 const path = require("path");
 const hbs = require("hbs");
+const dotenv = require("dotenv");
 const { LogInModel, UserModel } = require("./src/mongodb");
 
+// Load environment variables from .env file
+dotenv.config();
+
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 const templatePath = path.join(__dirname, "/templates");
 
 app.use(express.json());
