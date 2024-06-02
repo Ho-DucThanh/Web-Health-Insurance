@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const uri =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/Health_InSure";
+  process.env.MONGODB_URI ||
+  "mongodb://admin:ducthanh@52.23.230.211:27017/mydatabase?directConnection=true&appName=mongosh+2.2.6";
 
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
