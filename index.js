@@ -22,6 +22,10 @@ app.get("/", (req, res) => {
   res.render("signup");
 });
 
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
 app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -52,7 +56,7 @@ app.post("/signup", async (req, res) => {
     } else {
       const data = { email, password };
       await LogInModel.create(data);
-      res.status(201).render("home", { naming: email });
+      res.status(201).redirect("/"); // Redirect to login page
     }
   } catch (err) {
     res.status(500).send(err.message);
