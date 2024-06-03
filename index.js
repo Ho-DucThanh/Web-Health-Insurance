@@ -8,7 +8,7 @@ const { LogInModel, UserModel } = require("./src/mongodb");
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 const templatePath = path.join(__dirname, "/templates");
 
 app.use(express.json());
