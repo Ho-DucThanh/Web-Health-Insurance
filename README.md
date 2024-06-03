@@ -167,7 +167,7 @@
 - Chạy dự án
   ```bash
   npm start
-## Bước 4: Tạo Port range cho Dự án và Database
+## Bước 6: Tạo Port range cho Dự án và Database
 - Ở menu bên trái, dưới mục "Network & Security", chọn "Security Groups"
 - Chọn create Security Group
 
