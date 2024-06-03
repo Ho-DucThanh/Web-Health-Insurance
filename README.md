@@ -51,6 +51,9 @@
 - Begin using MongoDB
   ```bash
   mongosh
+- Use Mydatabase in MongoDB
+  ```bash
+  use mydatabase
 - Create My database
   ```bash
    db.createUser(

@@ -4,7 +4,7 @@ dotenv.config();
 
 const uri =
   process.env.MONGODB_URI ||
-  "mongodb://admin:ducthanh@54.174.141.213:27017/mydatabase?directConnection=true&appName=mongosh+2.2.6";
+  "mongodb://admin:ducthanh@54.209.181.238:27017/mydatabase?directConnection=true&appName=mongosh+2.2.6";
 
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
