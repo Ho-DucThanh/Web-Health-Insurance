@@ -30,8 +30,9 @@ app.get("/login", (req, res) => {
 app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    const check = await LogInModel.findOne({ email });
-    if (check && check.password === password) {
+    const user = await LogInModel.findOne({ email });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
       res.status(201).render("home", {
         naming: email,
       });
@@ -59,7 +60,7 @@ app.post("/signup", async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, salt);
       const data = { email, password: hashedPassword };
       await LogInModel.create(data);
-      res.status(201).redirect("/");
+      res.status(201).redirect("/"); // Redirect to login page
     }
   } catch (err) {
     res.status(500).send(err.message);
