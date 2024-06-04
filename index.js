@@ -5,7 +5,6 @@ const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
 const { LogInModel, UserModel } = require("./src/mongodb");
 
-// Load environment variables from .env file
 dotenv.config();
 
 const app = express();
@@ -67,7 +66,6 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-// Get all users
 app.get("/users", async (req, res) => {
   try {
     const users = await UserModel.find();
@@ -77,7 +75,6 @@ app.get("/users", async (req, res) => {
   }
 });
 
-// Create a new user
 app.post("/user", async (req, res) => {
   try {
     const user = req.body;
@@ -88,7 +85,6 @@ app.post("/user", async (req, res) => {
   }
 });
 
-// Update an existing user
 app.put("/user/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -102,7 +98,6 @@ app.put("/user/:id", async (req, res) => {
   }
 });
 
-// Delete an existing user
 app.delete("/user/:id", async (req, res) => {
   try {
     const { id } = req.params;
