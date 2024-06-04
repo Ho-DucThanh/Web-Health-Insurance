@@ -30,23 +30,31 @@ app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await LogInModel.findOne({ email });
+    if (!user) {
+      throw new Error("User not found");
+    }
 
-    if (user && (await bcrypt.compare(password, user.password))) {
-      res.status(201).render("home", {
+    const passwordsMatch = await bcrypt.compare(password, user.password);
+    console.log(`Passwords match: ${passwordsMatch}`);
+    console.log(user);
+
+    if (passwordsMatch) {
+      res.status(200).render("home", {
         naming: email,
       });
     } else {
       res.send("Invalid login details");
     }
   } catch (err) {
-    res.send("Invalid login details");
+    console.error(err);
+    res.send("Error login details");
   }
 });
 
 app.post("/signup", async (req, res) => {
   const { email, password, confirmPassword } = req.body;
 
-  if (password !== confirmPassword) {
+  if (password.trim() !== confirmPassword.trim()) {
     return res.send("Passwords do not match");
   }
 
@@ -55,9 +63,7 @@ app.post("/signup", async (req, res) => {
     if (checking) {
       res.send("User already exists");
     } else {
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(password, salt);
-      const data = { email, password: hashedPassword };
+      const data = { email, password: password.trim() };
       await LogInModel.create(data);
       res.status(201).redirect("/"); // Redirect to login page
     }
