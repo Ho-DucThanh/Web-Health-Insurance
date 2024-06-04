@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const bcrypt = require("bcrypt");
 dotenv.config();
 
 const uri =
@@ -25,6 +26,14 @@ const LogInSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+});
+
+LogInSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+  }
+  next();
 });
 
 const LogInModel = mongoose.model("User", LogInSchema);

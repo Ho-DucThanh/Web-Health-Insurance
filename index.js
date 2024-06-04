@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const hbs = require("hbs");
 const dotenv = require("dotenv");
+const bcrypt = require("bcrypt");
 const { LogInModel, UserModel } = require("./src/mongodb");
 
 // Load environment variables from .env file
@@ -54,9 +55,11 @@ app.post("/signup", async (req, res) => {
     if (checking) {
       res.send("User already exists");
     } else {
-      const data = { email, password };
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      const data = { email, password: hashedPassword };
       await LogInModel.create(data);
-      res.status(201).redirect("/"); // Redirect to login page
+      res.status(201).redirect("/");
     }
   } catch (err) {
     res.status(500).send(err.message);
